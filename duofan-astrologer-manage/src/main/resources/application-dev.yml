@@ -1,0 +1,118 @@
+server:
+  port: 8006
+spring:
+  application:
+    name: fly-astrologer-dev
+  datasource:
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    username: kit-db
+    #    password: mzEM2St3DFsSmeRs
+    #    url: jdbc:mysql://localhost:3306/kit-db?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: duofan-astro
+    password: BP5t58STi6rr7HEy
+    url: jdbc:mysql://101.35.55.200:3306/duofan-astro?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+  data:
+    redis:
+      password:
+      host: 127.0.0.1
+      port: 6379
+    #  security:
+    #    user:
+    #      password: root
+    #      name: root
+    #      roles: ADMIN
+  servlet:
+    multipart:
+      max-file-size: 1MB
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: order
+  api-docs:
+    path: /v3/api-docs
+    groups:
+      enabled: true
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.duofan.astrologer.manage.controller.api.v1
+    - group: 'fly-api-manage'
+      paths-to-match: '/**'
+      packages-to-scan: com.duofan.fly.manage.api.controller.v1
+    - group: 'fly-api-external'
+      paths-to-match: '/**'
+      packages-to-scan: com.duofan.fly.api
+#  devtools:
+#    livereload:
+#      enabled: false
+#  default-flat-param-object: true
+
+
+debug: false
+
+# 关闭Spring-boot-devtools热部署
+spring.devtools.restart.enabled: false
+
+#logging:
+#  level:
+#    org.springframework.security:
+#      TRACE
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    swagger-model-name: 实体类列表
+    enable-group: true
+  documents:
+    - name: 标题1
+      group: -v3-api-docs
+    - name: 标题2
+      group: fly
+  basic:
+    enable: false
+    username: abc
+    password: 123
+
+
+fly:
+  security:
+    login:
+      captchaEnabled: false
+      errorCountEnabled: true
+    filter:
+      malicious-request-lockout:
+        enabled: true
+  file-storage:
+    local:
+      upload-root: D:/home/duofan/upload
+      access-root: http://localhost:8000/cms/api/v1/file/download
+    file-path-info:
+      post:
+        path: /post
+        max-file-size: 10MB
+        allow-types:
+          - img
+          - jpg
+          - png
+          - jpeg
+          - gif
+        keep-suffix: true
+        resource-map-root-prefix-url: http://localhost:9898/
+      
+      cache:
+        path: /cache
+        # 10G
+        max-file-size: 50MB
+      avatar:
+        path: /avatar
+        maxFileSize: 1024
+        allowTypes:
+          - zip
+  jpa:
+    enabled: true
