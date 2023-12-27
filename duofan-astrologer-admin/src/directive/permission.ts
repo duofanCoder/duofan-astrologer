@@ -1,5 +1,5 @@
-import type { Directive, App, DirectiveBinding } from "vue";
-import { useUserStoreWithOut } from "@/stores/modules/user";
+import type {App, Directive, DirectiveBinding} from "vue";
+import {useUserStoreWithOut} from "@/stores/modules/user";
 
 function isAuth(el: Element, binding: any) {
     const userStore = useUserStoreWithOut();

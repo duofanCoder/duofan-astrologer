@@ -19,9 +19,10 @@ interface LoginParams {
 export const useUserStore = defineStore({
     id: "user",
     persist: true,
-    state: (): UserState => ({
+    state: (): { userInfo: any; roleIds: any[]; tokenInfo:any } => ({
         tokenInfo: {},
-        userInfo: {}
+        userInfo: {},
+        roleIds: []
     }),
     getters: {
         getToken(): string {
