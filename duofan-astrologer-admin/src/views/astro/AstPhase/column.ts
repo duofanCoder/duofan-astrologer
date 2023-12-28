@@ -4,11 +4,25 @@ import {Column} from "@/components/base-table/src/types";
 import {listDictKeyList} from "@/api/system/dict";
 
 export function useColumn(action?: any, dialog?: any) {
+    const astNameDic = ref([]);
+
+    listDictKeyList("astNameDic").then(data => {
+        astNameDic.value = data;
+    });
     const filterColumn: FormColumnType[] = [
         {
             fieldName: "name",
             fieldDesc: "名称",
             fieldType: FormTypeEnum.INPUT
+        },
+        {
+            fieldName: "id",
+            fieldDesc: "名称",
+            fieldType: FormTypeEnum.SELECT,
+            config: {
+                multiple: true,
+                api: () => unref(astNameDic),
+            }
         },
     ];
 

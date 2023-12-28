@@ -58,7 +58,6 @@ const showDialog = (val: any = {}) => {
         unref(baseFormRef).instance.resetFields();
         isEdit.value = !!val.username;
         if (unref(isEdit)) {
-          console.log(val);
             Object.assign(formModel, val, {
                 roleNo: val.roleNo?.split(","),
                 // deptId: val.deptId?.split(",").map((item: string) => parseFloat(item))
