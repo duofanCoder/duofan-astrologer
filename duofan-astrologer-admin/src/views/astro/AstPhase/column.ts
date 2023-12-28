@@ -14,9 +14,32 @@ export function useColumn(action?: any, dialog?: any) {
 
     const tableColumn: Column[] = [
         {
+            fieldName: "#",
+            fieldDesc: "操作",
+            formType: "operation",
+            width: 200,
+            operation: [
+                {
+                    icon: "edit",
+                    label: "编辑",
+                    callFunction: action?.edit
+                },
+                {
+                    icon: "CopyDocument",
+                    label: "复制",
+                    callFunction: action?.copy
+                },
+                {
+                    icon: "delete",
+                    label: "删除",
+                    callFunction: action?.delete
+                }
+            ]
+        },
+        {
+            fixed:"left",
             fieldName: "name",
             fieldDesc: "名称",
-            fixed:"left",
             width: 100,
             showOverflowTooltip: true,
         },
@@ -44,24 +67,7 @@ export function useColumn(action?: any, dialog?: any) {
             fieldDesc: "修改时间",
             width: 180,
         },
-        {
-            fieldName: "#",
-            fieldDesc: "操作",
-            formType: "operation",
-            width: 200,
-            operation: [
-                {
-                    icon: "edit",
-                    label: "编辑",
-                    callFunction: action?.edit
-                },
-                {
-                    icon: "delete",
-                    label: "删除",
-                    callFunction: action?.delete
-                }
-            ]
-        }
+
     ];
 
     const dialogColumn: FormColumnType[] = [

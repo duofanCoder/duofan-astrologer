@@ -3,14 +3,26 @@ import {pageAstPhase, removeAstPhase} from "@/api/astro/astPhase";
 import AstPhaseDialog from "./components/AstPhaseDialog.vue";
 import {useColumn} from "./column";
 import {useMessage} from "@/hooks";
+import useClipboard from 'vue-clipboard3';
 
 const router = useRouter();
+const { toClipboard } = useClipboard();
+const copyPreviewPath = async (text?: string) => {
+  try {
+    await toClipboard(text);
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 const {tableColumn, filterColumn} = useColumn({
   edit: handleEdit,
   delete: handleDelete,
+  copy:handleCopy,
   switchStatus: handleChangeStatus
 });
+
+
 
 const {success} = useMessage();
 
@@ -49,7 +61,11 @@ async function handleSearch() {
 
   tableConfig.pagination.pageCount = data.pageCount;
 }
-
+// 复制数据到剪切板
+function handleCopy(data: any){
+  copyPreviewPath(data.row.analysisContent);
+  success("复制成功");
+}
 function handleAddType() {
   unref(dialogRef).showDialog();
 }

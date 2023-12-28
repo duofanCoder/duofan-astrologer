@@ -2,6 +2,7 @@ package com.duofan.astrologer.service.impl;
 
 import cn.hutool.core.stream.StreamUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.duofan.astrologer.persistence.entity.AstPhase;
 import com.duofan.astrologer.persistence.mapper.AstPhaseMapper;
 import com.duofan.astrologer.service.AstPhaseService;
@@ -47,9 +48,6 @@ public class AstPhaseServiceImpl extends ServiceImpl<AstPhaseMapper, AstPhase> i
     @Override
     public FlyPageInfo<AstPhase> page(FlyPageInfo<AstPhase> pageInfo, AstPhase user) {
         Page<AstPhase> page = QueryUtils.buildPage(pageInfo, AstPhase.class);
-//        if (StrUtil.isNotBlank(user.getName())) {
-//            user.setName(":" + user.getName());
-//        } 
         if (StrUtil.isNotBlank(user.getAnalysisContent())) {
             user.setName(":" + user.getAnalysisContent());
         }
