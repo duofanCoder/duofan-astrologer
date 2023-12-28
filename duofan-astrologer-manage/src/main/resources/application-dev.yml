@@ -88,31 +88,5 @@ fly:
     filter:
       malicious-request-lockout:
         enabled: true
-  file-storage:
-    local:
-      upload-root: D:/home/duofan/upload
-      access-root: http://localhost:8000/cms/api/v1/file/download
-    file-path-info:
-      post:
-        path: /post
-        max-file-size: 10MB
-        allow-types:
-          - img
-          - jpg
-          - png
-          - jpeg
-          - gif
-        keep-suffix: true
-        resource-map-root-prefix-url: http://localhost:9898/
-      
-      cache:
-        path: /cache
-        # 10G
-        max-file-size: 50MB
-      avatar:
-        path: /avatar
-        maxFileSize: 1024
-        allowTypes:
-          - zip
   jpa:
     enabled: true

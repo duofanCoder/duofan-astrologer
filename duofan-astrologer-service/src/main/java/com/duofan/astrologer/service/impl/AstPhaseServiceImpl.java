@@ -36,7 +36,8 @@ public class AstPhaseServiceImpl extends ServiceImpl<AstPhaseMapper, AstPhase> i
         entity.setId(null);
         return super.save(entity);
     }
-
+    
+    
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean edit(AstPhase entity) {

@@ -10,8 +10,7 @@
         "preview": "vite preview",
         "deploy": "pnpm run build && node ./deploy.js",
         "lint": "eslint --ext=vue,js src",
-        "lint:fix": "eslint --ext=vue,js --fix src",
-        "prepare": "husky install"
+        "lint:fix": "eslint --ext=vue,js --fix src"
     },
     "dependencies": {
         "@element-plus/icons-vue": "^2.0.10",

@@ -1,15 +1,18 @@
 package com.duofan.astrologer.manage.controller.api.v1.astro;
 
+import cn.hutool.core.util.StrUtil;
 import com.duofan.astrologer.manage.controller.request.AstPhaseRequest;
 import com.duofan.astrologer.persistence.entity.AstPhase;
 import com.duofan.astrologer.service.AstPhaseService;
-
-import org.springframework.web.bind.annotation.*;
 import com.duofan.fly.core.base.domain.common.FlyPageInfo;
 import com.duofan.fly.core.base.domain.common.FlyResult;
+import com.duofan.fly.core.base.domain.exception.FlyBizException;
+import com.duofan.fly.core.base.domain.exception.FlyConstraintException;
 import com.duofan.fly.core.base.domain.permission.access.FlyAccessInfo;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
@@ -49,14 +52,34 @@ public class AstPhaseController {
     @PutMapping("/update")
     @FlyAccessInfo(opName = "AstPhase-修改信息")
     public FlyResult updateById(@RequestBody @Valid AstPhase request) {
-        service.updateById(request);
+        if (StrUtil.isNotBlank( request.getAnalysisContent())){
+            if (request.getAnalysisContent().length()>10000) {
+                throw new FlyConstraintException("字数超过1万");
+            }
+        }
+        try {
+            service.updateById(request);
+        } catch (DuplicateKeyException e) {
+            throw new FlyConstraintException("关键词重复");
+        }
+
         return FlyResult.SUCCESS;
     }
 
     @PostMapping("/save")
     @FlyAccessInfo(opName = "AstPhase-添加信息")
     public FlyResult save(@RequestBody @Valid AstPhase request) {
-        return FlyResult.success(service.save(request));
+        if (StrUtil.isNotBlank( request.getAnalysisContent())){
+            if (request.getAnalysisContent().length()>10000) {
+                throw new FlyConstraintException("字数超过1万");
+            }
+        }
+        try {
+            service.save(request);
+        } catch (DuplicateKeyException e) {
+            throw new FlyConstraintException("关键词重复");
+        }
+        return FlyResult.SUCCESS;
     }
 
     @DeleteMapping("/remove/batch")

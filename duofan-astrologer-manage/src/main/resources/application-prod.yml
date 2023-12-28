@@ -109,29 +109,5 @@ fly:
       port: 465
       from: 2633320940@qq.com
       pass: owrvhhfavcrmdigi
-  file-storage:
-    local:
-      upload-root: /www/app/cms/upload
-      access-root: https://cms.duofan.top/cms/api/v1/file/download
-    file-path-info:
-      post:
-        path: /post
-        max-file-size: 10MB
-        keep-suffix: true
-        resource-map-root-prefix-url: https://oss.duofan.top/
-        allow-types:
-          - img
-          - jpg
-          - png
-          - jpeg
-          - gif
-      avatar:
-        path: /avatar
-        max-file-size: 10MB
-        allowTypes:
-          - img
-          - jpg
-          - png
-          - jpeg
   jpa:
     enabled: true
