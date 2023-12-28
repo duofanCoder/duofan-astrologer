@@ -47,9 +47,9 @@ public class AstPhaseServiceImpl extends ServiceImpl<AstPhaseMapper, AstPhase> i
     @Override
     public FlyPageInfo<AstPhase> page(FlyPageInfo<AstPhase> pageInfo, AstPhase user) {
         Page<AstPhase> page = QueryUtils.buildPage(pageInfo, AstPhase.class);
-        if (StrUtil.isNotBlank(user.getName())) {
-            user.setName(":" + user.getName());
-        }
+//        if (StrUtil.isNotBlank(user.getName())) {
+//            user.setName(":" + user.getName());
+//        } 
         if (StrUtil.isNotBlank(user.getAnalysisContent())) {
             user.setName(":" + user.getAnalysisContent());
         }
