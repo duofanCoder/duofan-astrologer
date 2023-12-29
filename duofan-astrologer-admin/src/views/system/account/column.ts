@@ -31,7 +31,7 @@ export function useColumn(action?: any) {
             fieldDesc: "冻结状态",
             fieldType: FormTypeEnum.SELECT,
             config: {
-                options: StatusData
+                options: StatusData,
             }
         }
     ];

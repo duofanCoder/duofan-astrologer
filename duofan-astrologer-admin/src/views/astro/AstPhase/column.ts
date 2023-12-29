@@ -20,8 +20,8 @@ export function useColumn(action?: any, dialog?: any) {
             fieldDesc: "名称",
             fieldType: FormTypeEnum.SELECT,
             config: {
-                multiple: true,
                 api: () => unref(astNameDic),
+                multiple: true,
             }
         },
     ];
@@ -60,7 +60,7 @@ export function useColumn(action?: any, dialog?: any) {
         {
             fieldName: "analysisContent",
             fieldDesc: "解析",
-            width: 300,
+            width: 400,
             showOverflowTooltip: true,
             config: {
             }
@@ -68,6 +68,7 @@ export function useColumn(action?: any, dialog?: any) {
         {
             fieldName: "remark",
             fieldDesc: "备注",
+            width: 200,
             showOverflowTooltip: true,
         },
         {
