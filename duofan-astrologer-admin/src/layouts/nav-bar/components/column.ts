@@ -66,29 +66,27 @@ export function useColumn(action?: any, dialog?: any) {
 
     const dialogColumn: FormColumnType[] = [
         {
-            fieldName: "password",
-            fieldDesc: "名称",
-            fieldType: FormTypeEnum.INPUT
-        },
-
-        {
-            fieldName: "analysisContent",
-            fieldDesc: "解析",
+            fieldName: "rawPassword",
+            fieldDesc: "原密码",
             fieldType: FormTypeEnum.INPUT,
             config: {
-                type: 'textarea',
-                rows: 20,
-                colProps: {
-                    span: 24
-                }
+                type: "password"
             }
         },
         {
-            fieldName: "remark",
-            fieldDesc: "备注",
+            fieldName: "newPassword",
+            fieldDesc: "新密码",
             fieldType: FormTypeEnum.INPUT,
             config: {
-                type: 'textarea',
+                type: "password"
+            }
+        },
+        {
+            fieldName: "enPassword",
+            fieldDesc: "确认密码",
+            fieldType: FormTypeEnum.INPUT,
+            config: {
+                type: "password"
             }
         },
     ];

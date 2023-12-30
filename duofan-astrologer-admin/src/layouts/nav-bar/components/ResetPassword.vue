@@ -1,5 +1,5 @@
 <template>
-  <base-dialog ref="baseDialogRef" :fullscreen="fullscreen" :title="getDialogTitle" :width="getWidth" @save="handleSave">
+  <base-dialog ref="baseDialogRef" :fullscreen="fullscreen" :width="getWidth" title="修改密码" @save="handleSave">
     <base-form ref="baseFormRef" :columns="getColumn" :model="state.formModel" :rules="userRules"
                :label-position="labelPosition"
     >
@@ -10,9 +10,11 @@
 <script lang="ts" setup>
 import {useColumn} from "./column";
 import {useMessage} from "@/hooks";
-import {saveAstPhase, updateAstPhase} from "@/api/astro/astPhase";
 import {breakpointsTailwind, useBreakpoints} from '@vueuse/core';
 import {computed} from "vue";
+import {resetUserPassword} from "@/api/system/user";
+import {useUserStore} from "@/stores/modules/user";
+import {useNavBarSetting} from "@/layouts/hooks/useNavBarSetting";
 
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const smallerThanSm = breakpoints.smaller('sm');
@@ -47,53 +49,49 @@ const getColumn = computed(() => {
 });
 
 const userRules = {
-  title: [
+  rawPassword: [
     {
       required: true,
-      message: "请输入名称",
+      message: "请输入",
       trigger: ["blur", "change"]
     }
-  ], typeId: [
+  ], newPassword: [
     {
       required: true,
-      message: "请输入分类",
+      message: "请输入",
       trigger: ["blur", "change"]
     }
   ],
-  description: [
+  enPassword: [
     {
       required: true,
-      message: "请输入描述",
+      message: "请输入",
       trigger: ["blur", "change"]
     }
   ]
 };
 
-const getDialogTitle = computed(() => (state.isEdit ? "修改" : "新增"));
 
 const showDialog = (val: any = {}) => {
   unref(baseDialogRef).showDialog();
-  nextTick(async () => {
-    unref(baseFormRef).instance.resetFields();
-    state.isEdit = !!val.id;
-    if (state.isEdit) {
-      Object.assign(state.formModel, val);
-    }
-  });
 };
 
 const hideDialog = () => {
   unref(baseDialogRef).hideDialog();
 };
-
+const router = useRouter();
+const message = useMessage();
 const handleSave = async (loading: (flag: boolean) => void) => {
   await unref(baseFormRef).instance.validate(async (valid: boolean) => {
     if (!valid) return;
     loading(true);
     try {
-      state.isEdit ? await updateAstPhase(state.formModel) : await saveAstPhase(state.formModel);
-      success(state.isEdit ? "修改成功" : "新增成功！");
-      emit("success");
+      if (state.formModel!.newPassword !== state.formModel!.enPassword) {
+        message.error("两次密码不一致");
+        return;
+      }
+      await resetUserPassword(state.formModel);
+      useUserStore().logout(router);
       hideDialog();
     } finally {
       loading(false);

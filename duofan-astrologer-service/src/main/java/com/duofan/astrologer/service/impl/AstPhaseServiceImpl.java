@@ -51,7 +51,7 @@ public class AstPhaseServiceImpl extends ServiceImpl<AstPhaseMapper, AstPhase> i
         if (StrUtil.isNotBlank(user.getAnalysisContent())) {
             user.setName(":" + user.getAnalysisContent());
         }
-        QueryWrapper<AstPhase> wp = QueryUtils.buildQueryWrapper(user, List.of("name", "analysisContent"), AstPhase.class);
+        QueryWrapper<AstPhase> wp = QueryUtils.buildQueryWrapper(user, List.of("name", "analysisContent","id"), AstPhase.class);
         Page<AstPhase> data = page(page, wp);
         wp.orderByDesc("update_time");
         return FlyPageInfo.of(data);

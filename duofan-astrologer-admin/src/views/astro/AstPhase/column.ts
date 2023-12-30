@@ -11,15 +11,12 @@ export function useColumn(action?: any, dialog?: any) {
     });
     const filterColumn: FormColumnType[] = [
         {
-            fieldName: "name",
-            fieldDesc: "名称",
-            fieldType: FormTypeEnum.INPUT
-        },
-        {
             fieldName: "id",
             fieldDesc: "名称",
             fieldType: FormTypeEnum.SELECT,
             config: {
+                filterable: true,
+                clearable: true,
                 api: () => unref(astNameDic),
                 multiple: true,
             }

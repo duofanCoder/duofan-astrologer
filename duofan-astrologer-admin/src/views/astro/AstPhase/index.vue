@@ -30,7 +30,8 @@ const filterConfig = reactive({
   columns: filterColumn,
   onSearch: handleSearch,
   showOpen: false,
-  searchInfo: {}
+  searchInfo: {},
+  queryParams: {}
 });
 
 const tableConfig = reactive({
@@ -56,7 +57,7 @@ onMounted(() => {
  */
 async function handleSearch() {
   const {pageSize, pageIndex} = tableConfig.pagination;
-  const data = await pageAstPhase({...filterConfig.searchInfo, pageIndex, pageSize});
+  const data = await pageAstPhase({...filterConfig.queryParams, pageIndex, pageSize});
   tableConfig.data = data.list || [];
 
   tableConfig.pagination.pageCount = data.pageCount;

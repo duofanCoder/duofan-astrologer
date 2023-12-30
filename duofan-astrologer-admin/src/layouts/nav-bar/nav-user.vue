@@ -11,16 +11,20 @@
             </el-dropdown-menu>
         </template>
     </el-dropdown>
+  <ResetPassword ref="resetPasswordDialog" />
 </template>
 
 <script lang="ts" setup>
 import headImg from "@/assets/images/user/headImg.gif";
+import ResetPassword from "./components/ResetPassword.vue";
 import { useNavBarSetting } from "../hooks/useNavBarSetting";
 
 const { getUserInfo, logout } = useNavBarSetting();
 
+const resetPasswordDialog =ref();
+
 const resetPassword = () => {
-    console.log("resetPassword");
+  unref(resetPasswordDialog).showDialog();
 };
 </script>
 
