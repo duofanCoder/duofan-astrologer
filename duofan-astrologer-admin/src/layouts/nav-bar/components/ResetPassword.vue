@@ -42,7 +42,11 @@ const state = reactive({
   isEdit: false,
   treeData: [],
   treeCheckData: [],
-  formModel: {}
+  formModel: {
+    rawPassword: "",
+    newPassword: "",
+    enPassword: ""
+  }
 });
 const getColumn = computed(() => {
   return useColumn(undefined, state).dialogColumn;
