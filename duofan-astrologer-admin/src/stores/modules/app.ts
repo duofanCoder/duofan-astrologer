@@ -30,7 +30,7 @@ export const useAppStore = defineStore({
             collapse: false,
             sideWidth: 240,
             sideCollapsed: 64,
-            systemTitle: "FLY BOOT ADMIN"
+            systemTitle: "占星师后台"
         },
         headerConfig: {
             pageSize: "default"

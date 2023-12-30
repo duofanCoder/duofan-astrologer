@@ -7,7 +7,7 @@ import useClipboard from 'vue-clipboard3';
 
 const router = useRouter();
 const { toClipboard } = useClipboard();
-const copyPreviewPath = async (text?: string) => {
+const copyPreviewPath = async (text: string) => {
   try {
     await toClipboard(text);
   } catch (e) {
