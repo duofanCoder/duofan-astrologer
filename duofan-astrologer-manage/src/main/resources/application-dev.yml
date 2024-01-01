@@ -83,7 +83,7 @@ knife4j:
 fly:
   security:
     login:
-      captchaEnabled: true
+      captchaEnabled: false
       errorCountEnabled: true
     filter:
       malicious-request-lockout:
