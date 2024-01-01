@@ -71,6 +71,15 @@ function handleAddType() {
   unref(dialogRef).showDialog();
 }
 
+function handleCopyType() {
+  let copyStr = "";
+  tableConfig.data.forEach((item: any) => {
+    copyStr += item.name + ":" + item.analysisContent + "\n";
+  });
+  copyPreviewPath(copyStr);
+  success("复制成功");
+}
+
 function handleEdit(scope: any) {
   unref(dialogRef).showDialog(scope.row);
 }
@@ -97,6 +106,7 @@ async function handleChangeStatus(val: any) {
     <base-page-table :filter-config="filterConfig" :table-config="tableConfig" table-title="列表">
       <template #buttons>
         <base-button type="primary" @click="handleAddType">新增</base-button>
+        <base-button type="primary" @click="handleCopyType">复制</base-button>
       </template>
     </base-page-table>
     <AstPhaseDialog ref="dialogRef" @success="handleSearch"/>
